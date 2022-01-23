@@ -1,5 +1,5 @@
 # entry template name
 
-# subheading 
+## subheading 
 
 parragraph ..
