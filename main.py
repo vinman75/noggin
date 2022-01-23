@@ -1,10 +1,30 @@
-# main
 import PySimpleGUI as sg
 
 
-def main():
-    pass
+left_side = [
+    [sg.Text('left_side')],
+    [sg.Text(size=(40, 1), key="-LTOUT-")],
+]
+
+right_side = [
+    [sg.Text('left_side')],
+    [sg.Text(size=(40, 1), key="-RTOUT-")],
+]
 
 
-if __name__ == "__main__":
-    main()
+layout = [
+    [
+        sg.Column(left_side),
+        sg.VSeperator(),
+        sg.Column(right_side)
+    ]
+]
+
+
+window = sg.Window('Noggin', layout)
+
+while True:
+    event, values = window.read()
+    if event == "Exit" or event == sg.WIN_CLOSED:
+        break
+window.close()
