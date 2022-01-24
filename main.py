@@ -3,14 +3,15 @@ import PySimpleGUI as sg
 import os.path
 import re
 
-sg.theme('DarkGrey14')
+sg.theme('DarkGrey13')
+sg.set_options(element_padding=(1, 1))
 ic = "noggin.ico"
 
 
 def rename(original):
-    layout = [[sg.Text('File Name')],
+    layout = [[sg.Text('File Name:')],
               [sg.Input(original[:-4])],
-              [sg.Button('Okay', enable_events=True,
+              [sg.Button('Okay', size=(39, 1), enable_events=True,
                          key='-REN-', bind_return_key=True)]
               ]
     popWin = sg.Window('Noggin Name', layout, icon=ic)
@@ -27,11 +28,11 @@ def rename(original):
 
 def confirm():
     filename = clean_str()
-    layout = [[sg.Text('Are you sure you want to delete: {} ?'.format(filename))],
-              [sg.Button('Yes', enable_events=True, key='-CONFIRM-'),
-               sg.Button('No', enable_events=True, key='-CANCEL-')]]
+    layout = [[sg.Text('Are you sure?')],
+              [sg.Button('Yes', size=(20, 1), enable_events=True, key='-CONFIRM-'),
+               sg.Button('No', size=(20, 1), enable_events=True, key='-CANCEL-')]]
 
-    confirmWin = sg.Window('Noggin Name', layout, icon=ic)
+    confirmWin = sg.Window('Delete: {}'.format(filename), layout, icon=ic)
 
     while True:     # Event Loop
         event, values = confirmWin.read()
@@ -111,18 +112,17 @@ def update_noggin(item):
 
 
 # window layout of the columns
-entries_column = [[sg.Button('New', enable_events=True, key='-NEW-')],
-
-                  [sg.Text('Noggin Entries:')],
-                  [sg.Listbox(refresh_entries(), size=(40, 20),
+entries_column = [[sg.Button('New', size=(6, 1), enable_events=True, key='-NEW-'), sg.Text('Noggin Entries:')],
+                  [sg.Listbox(refresh_entries(), size=(33, 23),
                               enable_events=True, key="-LIST-")],
-                  [sg.Text('Filter:'), sg.Input(size=(35, 1), enable_events=True, key='-INPUT-')]]
+                  [sg.Text('Filter:'), sg.Input(size=(30, 1), enable_events=True, key='-INPUT-')]]
 
-read_column = [[sg.Button('Save', enable_events=True, key='-SAVE-'),
-                sg.Button('Rename', enable_events=True, key='-REN-'),
-                sg.Button('Delete', enable_events=True, key='-DEL-')],
-               [sg.Text('Name:'), sg.Input(size=(53, 1), readonly=False,
-                                           enable_events=True, key='-NAME-')],
+read_column = [[sg.Button('Save', size=(16, 1), enable_events=True, key='-SAVE-'),
+                sg.Button('Rename', size=(17, 1),
+                          enable_events=True, key='-REN-'),
+                sg.Button('Delete', size=(17, 1), enable_events=True, key='-DEL-')],
+               [sg.Text('Viewing:'), sg.Input(size=(53, 1), readonly=False,
+                                              enable_events=True, key='-NAME-')],
                [sg.Multiline(size=(60, 24),  key="-MULTI-")]]
 
 layout = [[sg.Column(entries_column),
@@ -130,6 +130,7 @@ layout = [[sg.Column(entries_column),
            sg.Column(read_column)]]
 
 window = sg.Window('Noggin v1.0 - V.Rossini', layout, icon=ic)
+#window = make_window()
 
 # Event loop
 while True:
