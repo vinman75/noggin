@@ -3,7 +3,7 @@ import PySimpleGUI as sg
 import os.path
 import re
 
-sg.theme('DarkGrey9')
+sg.theme('DarkGrey14')
 
 
 def rename(original):
@@ -112,7 +112,7 @@ def update_noggin(item):
 # window layout of the columns
 entries_column = [[sg.Button('New', enable_events=True, key='-NEW-')],
 
-                  [sg.Text('Noggin Entries')],
+                  [sg.Text('Noggin Entries:')],
                   [sg.Listbox(refresh_entries(), size=(40, 20),
                               enable_events=True, key="-LIST-")],
                   [sg.Text('Filter:'), sg.Input(size=(35, 1), enable_events=True, key='-INPUT-')]]
@@ -128,7 +128,7 @@ layout = [[sg.Column(entries_column),
            sg.VSeperator(),
            sg.Column(read_column)]]
 
-window = sg.Window('Noggin', layout, icon="noggin-icon.ico")
+window = sg.Window('Noggin v1.0 - V.Rossini', layout, icon="noggin-icon.ico")
 
 # Event loop
 while True:
