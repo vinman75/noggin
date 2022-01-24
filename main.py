@@ -3,7 +3,7 @@ import PySimpleGUI as sg
 import os.path
 import re
 
-sg.theme('DarkBlue4')
+sg.theme('DarkGrey9')
 
 
 def refresh_entries():
@@ -28,17 +28,11 @@ def del_noggin(item):
     window['-NAME-'].update("")
 
 
-def update_noggin(old):
-    print(old)
-
-    String = values['-NAME-']
-    newname = re.findall("\'(.*?)\'", String)
-    del_noggin(name[0])
-    print(newname[0])
-
-    #os.rename('entries/{}'.format(item), ('entries/{}'.format(newname)))
-    # window['-LIST-'].update(refresh_entries())
-    # window['-NAME-'].update("")
+def update_noggin(item):
+    with open('entries/{}'.format(item), mode='w') as f:
+        content = values['-MULTI-']
+        f.write(content)
+        window['-LIST-'].update(refresh_entries())
 
 
 # window layout of the columns
@@ -51,7 +45,7 @@ entries_column = [[sg.Button('New', enable_events=True, key='-NEW-')],
 read_column = [[sg.Button('Update', enable_events=True, key='-UPDATE-'), sg.Button('Delete', enable_events=True, key='-DEL-')],
                [sg.Text('Name:'), sg.Input(size=(53, 1),
                                            enable_events=True, key='-NAME-')],
-               [sg.Multiline(size=(60, 24), background_color='#ffffff', text_color='black', key="-MULTI-")]]
+               [sg.Multiline(size=(60, 24),  key="-MULTI-")]]
 
 layout = [[sg.Column(entries_column),
            sg.VSeperator(),
