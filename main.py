@@ -4,6 +4,7 @@ import os.path
 import re
 
 sg.theme('DarkGrey14')
+ic = "noggin.ico"
 
 
 def rename(original):
@@ -12,7 +13,7 @@ def rename(original):
               [sg.Button('Okay', enable_events=True,
                          key='-REN-', bind_return_key=True)]
               ]
-    popWin = sg.Window('Noggin Name', layout, icon="noggin-icon.ico")
+    popWin = sg.Window('Noggin Name', layout, icon=ic)
 
     while True:     # Event Loop
         event, values = popWin.read()
@@ -30,7 +31,7 @@ def confirm():
               [sg.Button('Yes', enable_events=True, key='-CONFIRM-'),
                sg.Button('No', enable_events=True, key='-CANCEL-')]]
 
-    confirmWin = sg.Window('Noggin Name', layout, icon="noggin.ico")
+    confirmWin = sg.Window('Noggin Name', layout, icon=ic)
 
     while True:     # Event Loop
         event, values = confirmWin.read()
@@ -128,7 +129,7 @@ layout = [[sg.Column(entries_column),
            sg.VSeperator(),
            sg.Column(read_column)]]
 
-window = sg.Window('Noggin v1.0 - V.Rossini', layout, icon="noggin-icon.ico")
+window = sg.Window('Noggin v1.0 - V.Rossini', layout, icon=ic)
 
 # Event loop
 while True:
