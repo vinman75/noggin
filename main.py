@@ -30,7 +30,7 @@ def confirm():
               [sg.Button('Yes', enable_events=True, key='-CONFIRM-'),
                sg.Button('No', enable_events=True, key='-CANCEL-')]]
 
-    confirmWin = sg.Window('Noggin Name', layout, icon="noggin-icon.ico")
+    confirmWin = sg.Window('Noggin Name', layout, icon="noggin.ico")
 
     while True:     # Event Loop
         event, values = confirmWin.read()
