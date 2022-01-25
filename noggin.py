@@ -5,7 +5,7 @@ import re
 
 sg.theme('DarkGrey13')
 sg.set_options(element_padding=(1, 1))
-ic = "noggin.ico"
+ic = "nog.ico"
 
 
 def rename(original):
