@@ -107,7 +107,14 @@ def global_search(gword):
     return(entries)
 
 
-# window layout of the columns
+def local_search(word):
+    entries = []
+    for file in refresh_entries():
+        if re.search(word, file, re.IGNORECASE):
+            entries.append(file)
+    return(entries)
+
+
 # window layout of the columns
 frame = [[sg.Radio('Title Search', group_id=1,  default=True, enable_events=True, key='-LOCAL-'),
           sg.Radio('Keyword Search', group_id=1, enable_events=True, key='-GLOBAL-')],
@@ -135,16 +142,19 @@ while True:
     event, values = window.read()
     if event == "Exit" or event == sg.WIN_CLOSED:
         break
+
     if values['-FILTER-'] != '' and values['-LOCAL-']:
         search = values['-FILTER-']
-        filtered = [x for x in refresh_entries() if search in x]
+        filtered = local_search(search)
         window['-LIST-'].update(filtered)
+
     elif values['-FILTER-'] != '' and values['-GLOBAL-']:
         search = values['-FILTER-']
-        filter = global_search(search)
-        window['-LIST-'].update(filter)
+        filtered = global_search(search)
+        window['-LIST-'].update(filtered)
     else:
         window['-LIST-'].update(refresh_entries())
+
     if event == '-LIST-' and len(values['-LIST-']):
         load_entry(values['-LIST-'])
         window['-NAME-'].update(values['-LIST-'])
