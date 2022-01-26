@@ -2,7 +2,7 @@
 
 import PySimpleGUI as sg
 import os.path
-from re import findall
+import re
 
 sg.theme('DarkGrey13')
 sg.set_options(element_padding=(1, 1))
@@ -20,23 +20,24 @@ def rename(original):
 
 def delete_noggin():
     filename = str_name()
-    layout = [[sg.T('Are you sure?')],
-              [sg.Ok(size=(20, 1)),
-               sg.Cancel(size=(20, 1))]]
-    window = sg.Window(f'Delete: {filename}', layout, icon=ic)
-    event, values = window.read()
-    if event == 'Ok':
-        name = str_name()
-        del_noggin(name)
-        window.close()
-    else:
-        window.close()
+    if filename:
+        layout = [[sg.T('Are you sure?')],
+                  [sg.Ok(size=(20, 1)),
+                   sg.Cancel(size=(20, 1))]]
+        window = sg.Window(f'Delete: {filename}', layout, icon=ic)
+        event, values = window.read()
+        if event == 'Ok':
+            name = str_name()
+            del_noggin(name)
+            window.close()
+        else:
+            window.close()
 
 
 def str_name():
     try:
         inputString = values['-NAME-']
-        name = findall("\'(.*?)\'", inputString)
+        name = re.findall("\'(.*?)\'", inputString)
         return name[0]
     except IndexError:
         pass
@@ -67,11 +68,9 @@ def rename_old(old_name):
         filename = rename(str_name())
         if filename:
             os.rename(f'entries/{old_name}', f'entries/{filename}.nog')
-            window['-NAME-'].update(f'{filename}.nog')
             window['-LIST-'].update(refresh_entries())
             window['-NAME-'].update([f'{filename}.nog'])
             load_entry([f'{filename}.nog'])
-
     except TypeError:
         pass
 
@@ -97,11 +96,22 @@ def update_noggin(item):
             pass
 
 
+def global_search(gword):
+    path = ('entries')
+    entries = []
+    files = os.listdir(path)
+    for file in files:
+        with open(os.path.join(path, file), 'r') as f:
+            if re.search(gword, f.read(), re.IGNORECASE):
+                entries.append(file)
+    return(entries)
+
+
 # window layout of the columns
 entries_column = [[sg.Button('New', size=(6, 1), key='-NEW-'), sg.Text('Noggin Entries:')],
                   [sg.Listbox(refresh_entries(), size=(33, 23),
                               enable_events=True, key="-LIST-")],
-                  [sg.Text('Filter:'), sg.Input(size=(30, 1), enable_events=True, key='-FILTER-')]]
+                  [sg.Text('Filter:'), sg.Input(size=(28, 1), enable_events=True, key='-FILTER-')]]
 
 read_column = [[sg.Button('Save', size=(16, 1), key='-SAVE-'),
                 sg.Button('Rename', size=(17, 1), key='-REN-'),
@@ -120,21 +130,28 @@ while True:
     event, values = window.read()
     if event == "Exit" or event == sg.WIN_CLOSED:
         break
+
     if values['-FILTER-'] != '':
         search = values['-FILTER-']
-        filtered = [x for x in refresh_entries() if search in x]
-        window['-LIST-'].update(filtered)
+        filter = global_search(search)
+        window['-LIST-'].update(filter)
     else:
         window['-LIST-'].update(refresh_entries())
+
     if event == '-LIST-' and len(values['-LIST-']):
         load_entry(values['-LIST-'])
         window['-NAME-'].update(values['-LIST-'])
+
     if event == '-NEW-':
         new_noggin()
+
     if event == '-DEL-':
         delete_noggin()
+
     if event == '-SAVE-':
         update_noggin(str_name())
+
     if event == '-REN-':
         rename_old(str_name())
+
 window.close()

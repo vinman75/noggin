@@ -12,11 +12,11 @@ Type what you want and then click Save.
 
 You can also Rename and Delete a Noggin.
 
-Finally, the Flter at the bottom left can be used to find any of your previous Noggin Entries. Providing you were sensible enough to give it a name that makes sense.
- 
+Finally, the Flter at the bottom left can be used to find any of your previous Noggin Entries, by searching for keyword in all Noggins.
+
 ## Purpose 
 Noggin is a personal project that was designed to store and edit useful programming tips in a GUI for easy access.
 Intallially the project was going to be the learning project for GIT and pySimpleGUI
 
 ### Required libraries
-PySimpleGUI 
+PySimpleGUI

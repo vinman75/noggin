@@ -79,7 +79,6 @@ def rename_old():
     try:
         inputString = values['-NAME-']
         old_name = re.findall("\'(.*?)\'", inputString)
-
         filename = rename(clean_str())
         if filename:
             os.rename('entries/{}'.format(old_name[0]),
