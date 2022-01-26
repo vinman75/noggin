@@ -109,7 +109,8 @@ def global_search(gword):
 
 # window layout of the columns
 # window layout of the columns
-frame = [[sg.Radio('Title Search', group_id=1,  default=True, key='-LOCAL-'), sg.Radio('Keyword Search', group_id=1, key='-GLOBAL-')],
+frame = [[sg.Radio('Title Search', group_id=1,  default=True, enable_events=True, key='-LOCAL-'),
+          sg.Radio('Keyword Search', group_id=1, enable_events=True, key='-GLOBAL-')],
          [sg.Text('Filter:'), sg.Input(size=(28, 1), enable_events=True, key='-FILTER-')]]
 
 entries_column = [[sg.Button('New', size=(6, 1), key='-NEW-'), sg.Text('Noggin Entries:')],
