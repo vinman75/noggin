@@ -128,7 +128,8 @@ entries_column = [[sg.Button('New', size=(6, 1), key='-NEW-'), sg.Text('Noggin E
 read_column = [[sg.Button('Save', size=(16, 1), key='-SAVE-'),
                 sg.Button('Rename', size=(17, 1), key='-REN-'),
                 sg.Button('Delete', size=(17, 1), key='-DEL-')],
-               [sg.Text('Viewing:'), sg.Input(size=(53, 1), key='-NAME-')],
+               [sg.Text('Viewing:'), sg.Input(
+                   size=(53, 1), key='-NAME-', readonly=True, text_color='black')],
                [sg.Multiline(size=(60, 27),  key="-MULTI-")]]
 
 layout = [[sg.Column(entries_column),
