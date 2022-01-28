@@ -4,8 +4,10 @@ import PySimpleGUI as sg
 import os.path
 import re
 
+
 sg.theme('DarkGrey13')
 sg.set_options(element_padding=(1, 1))
+entries_path = 'entries'
 ic = "nog.ico"
 
 
@@ -44,12 +46,12 @@ def str_name():
 
 
 def refresh_entries():
-    saved_entries = os.listdir('entries')
+    saved_entries = os.listdir(entries_path)
     return saved_entries
 
 
 def load_entry(item):
-    with open(f'entries/{item[0]}') as f:
+    with open(f'{entries_path}/{item[0]}') as f:
         text = f.read()
     window['-MULTI-'].update(text)
 
@@ -57,7 +59,7 @@ def load_entry(item):
 def new_noggin():
     filename = rename('')
     if filename:
-        with open(f'entries/{filename}.nog', mode='a'):
+        with open(f'{entries_path}/{filename}.nog', mode='a'):
             window['-LIST-'].update(refresh_entries())
             window['-NAME-'].update([f'{filename}.nog'])
             load_entry([f'{filename}.nog'])
@@ -67,7 +69,8 @@ def rename_old(old_name):
     try:
         filename = rename(str_name())
         if filename:
-            os.rename(f'entries/{old_name}', f'entries/{filename}.nog')
+            os.rename(f'{entries_path}/{old_name}',
+                      f'{entries_path}/{filename}.nog')
             window['-LIST-'].update(refresh_entries())
             window['-NAME-'].update([f'{filename}.nog'])
             load_entry([f'{filename}.nog'])
@@ -77,7 +80,7 @@ def rename_old(old_name):
 
 def del_noggin(item):
     try:
-        os.remove(f'entries/{item}')
+        os.remove(f'{entries_path}/{item}')
         window['-MULTI-'].update("")
         window['-NAME-'].update("")
         window['-LIST-'].update(refresh_entries())
@@ -88,7 +91,7 @@ def del_noggin(item):
 def update_noggin(item):
     if values['-NAME-']:
         try:
-            with open(f'entries/{item}', mode='w') as f:
+            with open(f'{entries_path}/{item}', mode='w') as f:
                 content = values['-MULTI-']
                 f.write(content)
                 window['-LIST-'].update(refresh_entries())
@@ -97,7 +100,7 @@ def update_noggin(item):
 
 
 def global_search(gword):
-    path = ('entries')
+    path = entries_path
     entries = []
     files = os.listdir(path)
     for file in files:
@@ -143,19 +146,16 @@ while True:
     event, values = window.read()
     if event == "Exit" or event == sg.WIN_CLOSED:
         break
-
     if values['-FILTER-'] != '' and values['-LOCAL-']:
         search = values['-FILTER-']
         filtered = local_search(search)
         window['-LIST-'].update(filtered)
-
     elif values['-FILTER-'] != '' and values['-GLOBAL-']:
         search = values['-FILTER-']
         filtered = global_search(search)
         window['-LIST-'].update(filtered)
     else:
         window['-LIST-'].update(refresh_entries())
-
     if event == '-LIST-' and len(values['-LIST-']):
         load_entry(values['-LIST-'])
         window['-NAME-'].update(values['-LIST-'])
@@ -167,5 +167,4 @@ while True:
         update_noggin(str_name())
     if event == '-REN-':
         rename_old(str_name())
-
 window.close()
