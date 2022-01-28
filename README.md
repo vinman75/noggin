@@ -12,7 +12,7 @@ Type what you want and then click Save.
 
 You can also Rename and Delete a Noggin.
 
-Finally, the Flter at the bottom left can be used to find any of your previous Noggin Entries, by searching for keyword in all Noggins.
+Finally, the Search Method and Filter can be used to find any of your previous Noggin Entries. Either by searching for Noggin titles or keywords across all Noggins.
 
 ## Purpose 
 Noggin is a personal project that was designed to store and edit useful programming tips in a GUI for easy access.
