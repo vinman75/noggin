@@ -1,4 +1,4 @@
-# Noggin can help your noggin
+# Noggin
 
 **Version 1.0.0**
 
@@ -9,6 +9,9 @@ Noggin is a personal project that was designed to store and edit useful programm
 Intallially the project was going to be my learning project for GIT and pySimpleGUI
 
 ---
+
+## Noggin can help your noggin
+
 Noggin is a simple tool that can help to save snippets of information.
 
 Think of it as a notepad, but with the benefit of being able to quickly save and find your little snippets or Noggins.
