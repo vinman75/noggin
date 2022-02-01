@@ -4,14 +4,11 @@
 
 ---
 
-## Purpose 
+### Purpose 
 Noggin is a personal project that was designed to store and edit useful programming tips in a GUI for easy access.
 Intallially the project was going to be the learning project for GIT and pySimpleGUI
 
 ---
-
-![image](noggin_gui.png)
-
 Noggin is a simple tool that can help to save snippets of information.
 
 Think of it as a notepad, but with the benefit of being able to quickly save and find your little snippets or Noggins.
@@ -25,15 +22,16 @@ Type what you want and then click Save.
 You can also Rename and Delete a Noggin.
 
 You can search for Noggin titles or keywords across all Noggins.
+![image](noggin_gui.png)
 
 ---
 
 ### Requirements
-Python 3.7* or above
-PySimpleGUI `pip install PySimpleGUI`
+1. Python 3.8* or above
+2. PySimpleGUI `pip install PySimpleGUI`
 
 ### How to run
-python noggin.py
+`python noggin.py`
 
 ---
 ## License & copyright
