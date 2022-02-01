@@ -6,7 +6,7 @@
 
 ### Purpose 
 Noggin is a personal project that was designed to store and edit useful programming tips in a GUI for easy access.
-Intallially the project was going to be the learning project for GIT and pySimpleGUI
+Intallially the project was going to be my learning project for GIT and pySimpleGUI
 
 ---
 Noggin is a simple tool that can help to save snippets of information.
