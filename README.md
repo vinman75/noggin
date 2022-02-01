@@ -1,4 +1,4 @@
-# Noggin can help your Noggin
+# Noggin can help your noggin
 
 **Version 1.0.0**
 
