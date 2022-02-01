@@ -14,6 +14,8 @@ You can also Rename and Delete a Noggin.
 
 Finally, the Search Method and Filter can be used to find any of your previous Noggin Entries. Either by searching for Noggin titles or keywords across all Noggins.
 
+![image](noggin_gui.png)
+
 ## Purpose 
 Noggin is a personal project that was designed to store and edit useful programming tips in a GUI for easy access.
 Intallially the project was going to be the learning project for GIT and pySimpleGUI
