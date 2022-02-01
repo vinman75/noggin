@@ -22,6 +22,9 @@ Type what you want and then click Save.
 You can also Rename and Delete a Noggin.
 
 You can search for Noggin titles or keywords across all Noggins.
+
+---
+
 ![image](noggin_gui.png)
 
 ---
