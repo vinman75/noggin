@@ -25,7 +25,7 @@ You can search for Noggin titles or keywords across all Noggins.
 
 ---
 
-![image](noggin_gui.png)
+![image](noggin-gui.png)
 
 ---
 
