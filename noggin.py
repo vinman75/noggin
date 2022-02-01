@@ -139,7 +139,7 @@ layout = [[sg.Column(entries_column),
            sg.VSeperator(),
            sg.Column(read_column)]]
 
-window = sg.Window('Noggin v1.0 - V.Rossini', layout, icon=ic)
+window = sg.Window('Noggin v1.0 - Vinman75', layout, icon=ic)
 
 # Event loop
 while True:
