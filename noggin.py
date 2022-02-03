@@ -4,7 +4,6 @@ import PySimpleGUI as sg
 import os.path
 import re
 
-
 sg.theme('DarkGrey13')
 sg.set_options(element_padding=(1, 1))
 entries_path = 'entries'
@@ -119,27 +118,37 @@ def local_search(word):
 
 
 # window layout of the columns
-frame = [[sg.Radio('Title Search', group_id=1,  default=True, enable_events=True, key='-LOCAL-'),
-          sg.Radio('Keyword Search', group_id=1, enable_events=True, key='-GLOBAL-')],
-         [sg.Text('Filter:'), sg.Input(size=(28, 1), enable_events=True, key='-FILTER-')]]
+frame = [[sg.Radio(
+    'Title Search', group_id=1, default=True,
+    enable_events=True, key='-LOCAL-'),
+    sg.Radio(
+        'Keyword Search', group_id=1,
+    enable_events=True, key='-GLOBAL-')],
+    [sg.Text('Filter:'), sg.Input(size=(
+        28, 1), enable_events=True, key='-FILTER-')]]
 
-entries_column = [[sg.Button('New', size=(6, 1), key='-NEW-'), sg.Text('Noggin Entries:')],
-                  [sg.Listbox(refresh_entries(), size=(33, 23),
-                              enable_events=True, key="-LIST-")],
-                  [sg.Frame('Search Method', frame)]]
+entries_column = [[sg.Button(
+    'New', size=(6, 1), key='-NEW-'),
+    sg.Text('Noggin Entries:')],
+    [sg.Listbox(
+        refresh_entries(), size=(33, 23),
+        enable_events=True, key="-LIST-")],
+    [sg.Frame('Search Method', frame)]]
 
 read_column = [[sg.Button('Save', size=(16, 1), key='-SAVE-'),
                 sg.Button('Rename', size=(17, 1), key='-REN-'),
                 sg.Button('Delete', size=(17, 1), key='-DEL-')],
                [sg.Text('Viewing:'), sg.Input(
-                   size=(53, 1), key='-NAME-', readonly=True, text_color='black')],
-               [sg.Multiline(size=(60, 27),  key="-MULTI-")]]
+                   size=(53, 1), key='-NAME-',
+                   readonly=True, text_color='black')],
+               [sg.Multiline(size=(60, 27), key="-MULTI-")]]
 
 layout = [[sg.Column(entries_column),
            sg.VSeperator(),
            sg.Column(read_column)]]
 
 window = sg.Window('Noggin v1.0.0', layout, icon=ic)
+
 
 # Event loop
 while True:
@@ -167,4 +176,5 @@ while True:
         update_noggin(str_name())
     if event == '-REN-':
         rename_old(str_name())
+
 window.close()
